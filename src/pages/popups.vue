@@ -29,8 +29,8 @@
         markers :[],
         infoWindow: {
           show: false,
-          longtitude: 0,
-          latitude: 0,
+          longtitude: 116.404,
+          latitude: 39.915,
           contents: '<div>这里是详细信息1</div><div>这里是详细信息2</div>',
           height: 175,
           width: 400
@@ -63,9 +63,9 @@
           longtitude: e.point.lng,
           latitude: e.point.lat
         }
-        this.infoWindow.longtitude = location.longtitude
-        this.infoWindow.latitude = location.latitude
         this.infoWindow.show = true
+        // this.infoWindow.longtitude = location.longtitude
+        // this.infoWindow.latitude = location.latitude
       },
       infoWindowClose () {
         this.infoWindow.show = false
