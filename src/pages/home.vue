@@ -6,6 +6,9 @@
     <router-link to="personalitytheme" tag="a" active-class="selected">
       个性化地图样式
     </router-link>
+    <router-link to="popups" tag="a" active-class="selected">
+      信息弹出框
+    </router-link>
   </div>
 </template>
 <script>
