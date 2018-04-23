@@ -3,7 +3,7 @@
     <baidu-map :center="center"
                :zoom="zoom"
                :scroll-wheel-zoom="true"
-               :mapStyle="{styleJson: mapStyle}"
+               :mapStyle="myMayStyle"
                @ready="handler" class="map">
       <bml-marker-clusterer :averageCenter = "true">
         <bm-marker v-for="marker of markers" :position="{lng: marker.lng, lat: marker.lat}"></bm-marker>
@@ -20,15 +20,15 @@
         center: {lng: 0, lat: 0},
         zoom: 3,
         markers :[],
-        mapStyle: [
-          {
-            "featureType": "boundary",
-            "elementType": "geometry",
-            "stylers": {
-              "color": "#000000ff"
-            }
-          }
-        ]
+        myMayStyle:{
+          styleJson: [{
+              "featureType": "boundary",
+              "elementType": "geometry",
+              "stylers": {
+                "color": "#000000ff"
+              }
+            }]
+        },
       }
     },
     methods: {
