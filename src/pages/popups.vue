@@ -55,7 +55,7 @@
         this.markers.push(...tempMarkers)
       },
       /*
-      * 汽车点击事件
+      * 点击事件
       * */
       markersClickHandler (e) {
         this.clickCounts ++
