@@ -64,8 +64,8 @@
           latitude: e.point.lat
         }
         this.infoWindow.show = true
-        // this.infoWindow.longtitude = location.longtitude
-        // this.infoWindow.latitude = location.latitude
+        this.infoWindow.longtitude = location.longtitude
+        this.infoWindow.latitude = location.latitude
       },
       infoWindowClose () {
         this.infoWindow.show = false
