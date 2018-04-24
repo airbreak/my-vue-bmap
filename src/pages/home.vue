@@ -7,7 +7,10 @@
       个性化地图样式
     </router-link>
     <router-link to="popups" tag="a" active-class="selected">
-      信息弹出框
+      信息弹出框（包裹在marker元素中，移动地图会消失）
+    </router-link>
+    <router-link to="popupstest" tag="a" active-class="selected">
+      信息弹出框（单独元素，移动地图不消失）
     </router-link>
   </div>
 </template>

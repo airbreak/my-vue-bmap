@@ -5,18 +5,16 @@
                :scroll-wheel-zoom="true"
                @ready="handler" class="map">
       <bml-marker-clusterer :averageCenter = "true">
-        <bm-marker v-for="marker of markers" :position="{lng: marker.lng, lat: marker.lat}" @click="markersClickHandler"></bm-marker>
+        <bm-marker v-for="marker of markers" :position="{lng: marker.lng, lat: marker.lat}" @click="markersClickHandler(marker)">
+          <bm-info-window
+            :show="marker.show"
+            autoPan="true"
+            :closeOnClick="closeOnClick"
+            @close="infoWindowClose(marker)" v-html="marker.detailContent">
+          </bm-info-window>
+        </bm-marker>
       </bml-marker-clusterer>
-      <bm-info-window title="车辆详细信息"
-                      :width="infoWindow.width"
-                      :height="infoWindow.height"
-                      :position="{lng: infoWindow.longtitude, lat:infoWindow.latitude}"
-                      :show="infoWindow.show"
-                      @close="infoWindowClose">
-        <p v-html="infoWindow.contents"></p>
-      </bm-info-window>
     </baidu-map>
-    <div class="click-tips-box">点击次数：{{clickCounts}}</div>
   </div>
 </template>
 <script>
@@ -24,18 +22,10 @@
   export default {
     data () {
       return {
+        closeOnClick: false,
         center: {lng: 0, lat: 0},
         zoom: 3,
-        markers :[],
-        infoWindow: {
-          show: false,
-          longtitude: 116.404,
-          latitude: 39.915,
-          contents: '<div>这里是详细信息1</div><div>这里是详细信息2</div>',
-          height: 175,
-          width: 400
-        },
-        clickCounts:0
+        markers :[]
       }
     },
     methods: {
@@ -49,7 +39,13 @@
       addMarkers () {
         let tempMarkers = []
         for(let i = 0; i < 10; i++ ){
-          let position = {lng: Math.random() * 40 + 85, lat: Math.random() * 30 + 21}
+          let position = {
+            lng: Math.random() * 40 + 85,
+            lat: Math.random() * 30 + 21,
+            show:false,
+            id: i,
+            detailContent: ''
+          }
           tempMarkers.push(position)
         }
         this.markers.push(...tempMarkers)
@@ -57,18 +53,15 @@
       /*
       * 点击事件
       * */
-      markersClickHandler (e) {
-        this.clickCounts ++
-        let location = {
-          longtitude: e.point.lng,
-          latitude: e.point.lat
-        }
-        this.infoWindow.show = true
-        this.infoWindow.longtitude = location.longtitude
-        this.infoWindow.latitude = location.latitude
+      markersClickHandler (marker) {
+        marker.show = true
+        marker.detailContent = '<p>这是第' + marker.id + '个详细信息</p>'+
+          '<p>斑马快跑APP是其全产业链的最佳体现，通过多维立体设计，</p>'+
+          '<p>综合了巴士、商用车、乘用车三种车型的叫车用车功能，为乘客提供最优出行方案，</p>'+
+          '<p>是一款综合所有车辆服务的的互联网约车产品，构建了一个全生态通行平台</p>'
       },
-      infoWindowClose () {
-        this.infoWindow.show = false
+      infoWindowClose (marker) {
+        marker.show = false
       }
     },
     components: {
