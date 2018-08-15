@@ -4,6 +4,7 @@ import Home from '@/pages/home'
 import Personality from '@/pages/personality'
 import Normal from '@/pages/normal'
 import Popups from '@/pages/popups'
+import PopupsNew from '@/pages/popups-new'
 import Popupstest from '@/pages/popupstest'
 
 Vue.use(Router)
@@ -34,6 +35,11 @@ export default new Router({
       path: '/popupstest',
       name: 'popupstest',
       component: Popupstest
+    },
+    {
+      path: '/popupsnew',
+      name: 'popupsnew',
+      component: PopupsNew
     }
   ]
 })
