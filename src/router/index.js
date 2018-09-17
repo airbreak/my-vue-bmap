@@ -6,6 +6,7 @@ import Normal from '@/pages/normal'
 import Popups from '@/pages/popups'
 import PopupsNew from '@/pages/popups-new'
 import Popupstest from '@/pages/popupstest'
+import Search from '@/pages/search'
 
 Vue.use(Router)
 // path:'type/:type/businessUserList',
@@ -40,6 +41,11 @@ export default new Router({
       path: '/popupsnew',
       name: 'popupsnew',
       component: PopupsNew
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: Search
     }
   ]
 })

@@ -1,44 +1,43 @@
 <template>
   <div>
+    <input type="text" v-model="keyword">
+    <input type="button" value="搜索" @click="doSearch()">
     <baidu-map :center="center"
                :zoom="zoom"
                :scroll-wheel-zoom="true"
                @ready="handler" class="map">
-      <bml-marker-clusterer :averageCenter = "true">
-        <bm-marker :key="marker.id" v-for="marker of markers" :position="{lng: marker.lng, lat: marker.lat}"></bm-marker>
-      </bml-marker-clusterer>
     </baidu-map>
-    <button @click="addMarkers">添加markers</button>
   </div>
 </template>
 <script>
-import {BmlMarkerClusterer} from 'vue-baidu-map'
 export default {
   data () {
     return {
       center: {lng: 0, lat: 0},
       zoom: 3,
-      markers: []
+      keyword: '',
+      local: null
     }
   },
   methods: {
     handler ({BMap, map}) {
       console.log(BMap, map)
+      this.local = new BMap.LocalSearch(map, {
+        renderOptions: {map: map}
+      })
       this.center.lng = 116.404
       this.center.lat = 39.915
-      this.zoom = 3
+      this.zoom = 5
+
+      map.addEventListener('click', function (e) {
+        alert(e.point.lng + ',' + e.point.lat)
+      })
     },
-    addMarkers () {
-      let tempMarkers = []
-      for (let i = 0; i < 10; i++) {
-        let position = {lng: Math.random() * 40 + 85, lat: Math.random() * 30 + 21}
-        tempMarkers.push(position)
-      }
-      this.markers.push(...tempMarkers)
+    doSearch () {
+      this.local.search(this.keyword)
     }
   },
   components: {
-    BmlMarkerClusterer
   }
 }
 </script>
@@ -56,5 +55,10 @@ export default {
     color: #fff;
     border-radius: 4px;
     cursor: pointer;
+  }
+  .click-tips-box{
+    margin-top: 10px;
+    color: #333;
+    font-size: 14px;
   }
 </style>

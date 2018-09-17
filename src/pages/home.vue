@@ -15,15 +15,18 @@
     <router-link to="popupsnew" tag="a" active-class="selected">
       信息弹出框（不包裹在marker元素中，功能正常）
     </router-link>
+    <router-link to="search" tag="a" active-class="selected">
+      搜索地名
+    </router-link>
   </div>
 </template>
 <script>
-  export default {
-    data () {
-      return {
-      }
-    },
+export default {
+  data () {
+    return {
+    }
   }
+}
 </script>
 <style>
   .link-box{
